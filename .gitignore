@@ -1,0 +1,10 @@
+/inspyred_chat/server/desktop.ini
+/source/
+/build/
+/desktop.ini
+/poetry.lock
+/Makefile
+/make.bat
+/generated/
+/inspyred_chat/server/config/.config.location
+/.idea/*

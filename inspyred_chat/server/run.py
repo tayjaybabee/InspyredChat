@@ -1,21 +1,23 @@
+#  Copyright (c) 2022. Inspyre Softworks
+
+import socket
 from threading import Thread
+from uuid import uuid4
 
 from inspyred_chat.server.cli import CLIArgs
 from inspyred_chat.server.config import Config
-from inspyred_chat.server.logger import LOG_DEVICE
 from inspyred_chat.server.info import PROG
-
-import socket
-import threading
-import uuid
-from uuid import uuid4
+from inspyred_chat.server.logger import LOG_DEVICE
 
 LOG = LOG_DEVICE.add_child(f'{PROG}.run')
 
 CONFIG = Config()
 _args = CLIArgs(CONFIG)
-ARGS = _args.parsed
 
+ARGS = _args.parsed
+"""
+The parsed arguments from invocation at the command-line.
+"""
 
 HOST = CONFIG.parser.get('USER', 'bind-addr')
 """
@@ -158,6 +160,7 @@ def handle(client):
             NICKS.remove(nick)
             break
 
+
 def new_uuid():
     """
     Generate a UUID for a connecting client.
@@ -183,6 +186,7 @@ def new_uuid():
             break
 
     return uid
+
 
 def client_send(client, msg):
     """
@@ -246,7 +250,7 @@ def req_from_client(client, pointer):
     pointers = [
         'UUID',
         'NICK'
-     ]
+    ]
 
     # Convert whatever string is in the 'pointer' parameter to uppercase.
     pointer = pointer.upper()
@@ -258,7 +262,7 @@ def req_from_client(client, pointer):
 
     client_send(client, f'REQ {pointer}')
 
-    return  client_receive(client)
+    return client_receive(client)
 
 
 def handshake(client):
