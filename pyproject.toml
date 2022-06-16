@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "InspyredChat"
+version = "0.1.0"
+description = ""
+authors = ["Taylor-Jayde Blackstone <tayjaybabee@gmail.com>"]
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+PySimpleGUI = "^4.60.0"
+inspyre-toolbox = "^1.2.6"
+clipboard = "^0.0.4"
+pyperclip = "^1.8.2"
+keyboard = "^0.13.5"
+progress = "^1.6"
+prompt-toolkit = "^3.0.29"
+cryptography = "^37.0.2"
+coverage = "^6.4.1"
+Sphinx = "^5.0.1"
+
+[tool.poetry.dev-dependencies]
+groundwork-sphinx-theme = "^1.1.1"
+
+[tool.poetry.scripts]
+inspyred-chat-server = "inspyred_chat.server.run:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
