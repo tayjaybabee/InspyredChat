@@ -1,8 +1,10 @@
+#  Copyright (c) 2022. Inspyre Softworks
+
 from inspy_logger import InspyLogger
 
 from inspyred_chat.server.info import PROG
 
-isl = InspyLogger(PROG, 'info')
+isl = InspyLogger(PROG, 'debug')
 LOG_DEVICE = isl.device
 ROOT_LOGGER = LOG_DEVICE.start()
 LOCAL_LOGGER = LOG_DEVICE.add_child(f'{PROG}.logger')

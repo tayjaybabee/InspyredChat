@@ -66,7 +66,7 @@ Note:
                             
                             Install:
                                 ```pip install ip-reveal-headless```
-    """
+ """
 
 CLIENTS = []
 """
@@ -110,7 +110,6 @@ def server_startup():
 
     Returns:
         None
-
     """
     SERVER.bind((HOST, PORT))
     SERVER.listen()
@@ -150,7 +149,7 @@ def handle(client):
             message = client.recv(1024)
             print(f'MSG {message}')
             broadcast(f'<<{nick}>> {message}'.encode('ascii'))
-        except:
+        except Exception:
             index = CLIENTS.index(client)
             CLIENTS.remove(client)
             client.close()
@@ -218,34 +217,23 @@ def client_receive(client):
     Returns:
         String:
             The decoded message from the client.
-
     """
     return client.recv(1024).decode('ascii')
 
 
 def req_from_client(client, pointer):
     """
-    Request information from the client.
+    The req_from_client function sends a REQ request to the client.
 
-    Providing a pointer and a client object to attempt to contact we send a
-    message to the given client with the request string for whatever pointer
-    provided after which it waits for the client response which is immediately
-    returned to the caller.
+    The 'pointer' parameter must be one of; UUID, NICK. Not case sensitive.
+
 
     Args:
-        client:
-            The client object from the socket.
-
-        pointer (String):
-            The pointer string indicating the piece of information you'd like to attain.
-
-            Note:
-                 The pointer string must be one of the valid pointers; 'NICK' or 'UUID'
+        client: Send messages to the client
+        pointer: Determine what data is sent to the client
 
     Returns:
-        response (String):
-            The response given by the client.
-
+        The value of the pointer parameter
     """
     pointers = [
         'UUID',
@@ -279,9 +267,14 @@ def handshake(client):
     print(f'CONNECTION UUID CREATE {connection_uuid}')
 
     client_send(client, 'REQ UUID')
+    provided_uuid = client_receive(client)
 
 
 def receive():
+    """
+    The 'receive' function is a loop that runs until the client disconnects from the server.
+    It receives messages from the client and broadcasts them to all other clients.
+    """
     while True:
         client, addr = SERVER.accept()
 
